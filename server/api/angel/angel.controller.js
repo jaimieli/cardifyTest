@@ -47,6 +47,16 @@ exports.getAngel = function(req, res) {
     var getJobs = function(callback){
       request('https://api.angel.co/1/startups/' + angelId + '/jobs', function(err, response, body){
         dataJSON4 = JSON.parse(body);
+        var dataLen = dataJSON4.length;
+        for (var i=0; i < dataLen; i++) {
+          var jobUrl = "https://angel.co/"
+                      + dataJSON4[i].startup.name.toLowerCase()
+                      + "/jobs/"
+                      + dataJSON4[i].id
+                      + "-"
+                      + dataJSON4[i].title.toLowerCase().split(' ').join('-');
+          dataJSON4[i].jobUrl = jobUrl;
+        }
         callback();
       }), function(err) {
         if(err) console.log(err);

@@ -16,13 +16,15 @@
       <li>
         <h5>{{job.title}}</h5>
         <p>Salary Range: ${{job.salary_min}} - ${{job.salary_max}}</p>
+        <p>Equity Range: {{job.equity_min}}% - {{job.equity_max}}%</p>
+        <a href="{{job.jobUrl}}" target="_blank">Learn More</a>
       </li>
     </ul>
     <h4 ng-if="companyData.employees">People</h4>
     <ul ng-repeat="employee in companyData.employees">
       <li>
         <h5 ng-click="Angel.getEmployee(employee.tagged.id)">{{employee.tagged.name}}</h5>
-        <p>Role: {{employee.role}}
+        <p>Role: {{employee.role}}</p>
         <p ng-show="employee.title && employee.title !== ''">Title: {{employee.title}}</p>
       </li>
     </ul>
@@ -31,14 +33,28 @@
     <h1>{{userData.aboutUser.name}}</h1>
     <img src="userData.aboutUser.image">
     <p><a href="{{userData.aboutUser.linkedin_url}}" target="_blank">LinkedIn</a></p>
-    <p ng-if="userData.aboutUser.bio">{{userData.aboutUser.bio}}</p>
-    <h4 ng-if="userData.aboutUser.roles">Roles</h4>
-    <ul ng-repeat="role in userData.aboutUser.roles">
-      <li>{{role.display_name}}</li>
-    </ul>
-    <h4 ng-if="userData.aboutUser.skills">Skills</h4>
-    <ul ng-repeat="skill in userData.aboutUser.skills">
-      <li>{{skill.display_name}} (Level: {{skill.level}})</li>
-    </ul>
+    <div ng-if="userData.aboutUser.bio">
+      <h4>Bio</h4>
+      <p ng-if="userData.aboutUser.bio">{{userData.aboutUser.bio}}</p>
+    </div>
+<!--     <div ng-if="userData.aboutUser.roles">
+      <h4>Roles</h4>
+      <ul ng-repeat="role in userData.aboutUser.roles">
+        <li>{{role.display_name}}</li>
+      </ul>
+    </div> -->
+    <div ng-if="userData.startupRoles">
+      <h4>Positions</h4>
+      <ul ng-repeat="position in userData.startupRoles">
+        <li ng-show="position.title && position.title!==''">{{position.title}} at {{position.startup.name}}</li>
+        <li ng-hide="position.title && position.title!==''">{{position.role}} at {{position.startup.name}}</li>
+      </ul>
+    </div>
+    <div ng-if="userData.aboutUser.skills">
+      <h4>Skills</h4>
+      <ul ng-repeat="skill in userData.aboutUser.skills">
+        <li>{{skill.display_name}} (Level: {{skill.level}})</li>
+      </ul>
+    </div>
   </div>
 </div>
