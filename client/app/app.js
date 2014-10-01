@@ -1,5 +1,7 @@
 'use strict';
- 
+
+// just adding a test comment here
+
 angular.module('cardifyTestApp', [
   'ngCookies',
   'ngResource',
