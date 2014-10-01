@@ -17,6 +17,7 @@ exports.getAngel = function(req, res) {
   var dataObj = {};
   var dataJSON2;
   var dataJSON3;
+  var dataJSON4;
   // angelList.search('', function(error, results){
   //   if(error) {
   //     console.log(error)
@@ -27,6 +28,7 @@ exports.getAngel = function(req, res) {
   var getId = function(done) {
     request('https://api.angel.co/1/search?query=' + company + '&type=Startup', function(err, response, body){
       dataJSON1 = JSON.parse(body);
+      angelId = dataJSON1[0].id;
       done(null, "done getting id")
     })
   }
@@ -36,31 +38,60 @@ exports.getAngel = function(req, res) {
 
   //   }
   // }
-  var getCompanyInfo = function(done){
-    angelId = dataJSON1[0].id;
-    request('https://api.angel.co/1/startups/' + angelId, function(err, response, body){
-      dataJSON2 = JSON.parse(body);
-      done(null, "done getting company info")
-    })
-  }
-
-  var getEmployees = function(done) {
-    request('https://api.angel.co/1/startup_roles?v=1&startup_id=' + angelId, function(err, response, body) {
-      dataJSON3 = JSON.parse(body).startup_roles;
-      done(null, "done getting company users");
+  var getCompanyEmployessAndJobs = function(done) {
+    var getCompanyInfo = function(callback){
+      request('https://api.angel.co/1/startups/' + angelId, function(err, response, body){
+        dataJSON2 = JSON.parse(body);
+        callback();
+      }), function(err) {
+        if(err) console.log(err);
+        callback();
+      }
+    };
+    var getEmployees = function(callback) {
+      request('https://api.angel.co/1/startup_roles?v=1&startup_id=' + angelId, function(err, response, body) {
+        dataJSON3 = JSON.parse(body).startup_roles;
+        callback();
+      }), function(err) {
+        if(err) console.log(err);
+        callback();
+      }
+    }
+    var getJobs = function(callback){
+      request('https://api.angel.co/1/startups/' + angelId + '/jobs', function(err, response, body){
+        dataJSON4 = JSON.parse(body);
+        callback();
+      }), function(err) {
+        if(err) console.log(err);
+        callback();
+      }
+    }
+    async.parallel([getCompanyInfo, getEmployees, getJobs], function(err, results){
+      if(err) console.log(err);
+      done(null, "done getting company info, employees, and jobs")
     })
   }
 
   var doneTasks = function(err, results) {
     if(err) console.log(err);
     console.log(results);
-    console.log('dataJSON2: ', dataJSON2);
-    dataObj['companyInfo'] = dataJSON2;
-    dataObj['employees'] = dataJSON3;
+    dataObj.companyInfo = dataJSON2;
+    dataObj.employees = dataJSON3;
+    dataObj.jobs = dataJSON4;
     res.send(dataObj);
   }
-  async.series([getId, getCompanyInfo, getEmployees], doneTasks);
+  async.series([getId, getCompanyEmployessAndJobs], doneTasks);
 }
+
+exports.getUser = function(req, res){
+  console.log('getUser backend');
+  var user = req.params.id;
+  var dataJSON5;
+  request('https://api.angel.co/1/users/' + user, function(err, response, body){
+    dataJSON5 = JSON.parse(body);
+    res.send(dataJSON5);
+  })
+};
 // Get list of angels
 exports.index = function(req, res) {
   Angel.find(function (err, angels) {
