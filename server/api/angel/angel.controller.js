@@ -2,7 +2,6 @@
 
 var _ = require('lodash');
 var Angel = require('./angel.model');
-var angelList = require('angellist');
 var request = require('request')
 var async = require('async');
 
@@ -18,13 +17,7 @@ exports.getAngel = function(req, res) {
   var dataJSON2;
   var dataJSON3;
   var dataJSON4;
-  // angelList.search('', function(error, results){
-  //   if(error) {
-  //     console.log(error)
-  //   }
-  //   return res.send(results);
-  // })
-  // return res.send("talking to front end");
+
   var getId = function(done) {
     request('https://api.angel.co/1/search?query=' + company + '&type=Startup', function(err, response, body){
       dataJSON1 = JSON.parse(body);
@@ -32,12 +25,6 @@ exports.getAngel = function(req, res) {
       done(null, "done getting id")
     })
   }
-
-  // var getCompanyInfo = function(done){
-  //   request() {
-
-  //   }
-  // }
   var getCompanyEmployessAndJobs = function(done) {
     var getCompanyInfo = function(callback){
       request('https://api.angel.co/1/startups/' + angelId, function(err, response, body){
@@ -83,6 +70,7 @@ exports.getAngel = function(req, res) {
   async.series([getId, getCompanyEmployessAndJobs], doneTasks);
 }
 
+// get data for a specific user
 exports.getUser = function(req, res){
   console.log('getUser backend');
   var user = req.params.id;
@@ -92,6 +80,7 @@ exports.getUser = function(req, res){
     res.send(dataJSON5);
   })
 };
+
 // Get list of angels
 exports.index = function(req, res) {
   Angel.find(function (err, angels) {
