@@ -5,7 +5,11 @@ angular.module('cardifyTestApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
-    }];
+    }, {
+      'title': 'Angel',
+      'link': '/displayAngel'
+    }
+    ];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;

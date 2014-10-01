@@ -2,7 +2,65 @@
 
 var _ = require('lodash');
 var Angel = require('./angel.model');
+var angelList = require('angellist');
+var request = require('request')
+var async = require('async');
 
+// angelList.init( , );
+
+// Get AngelList data for one company
+exports.getAngel = function(req, res) {
+  console.log('get Angel backend');
+  var company = req.params.id;
+  var angelId;
+  var dataJSON1;
+  var dataObj = {};
+  var dataJSON2;
+  var dataJSON3;
+  // angelList.search('', function(error, results){
+  //   if(error) {
+  //     console.log(error)
+  //   }
+  //   return res.send(results);
+  // })
+  // return res.send("talking to front end");
+  var getId = function(done) {
+    request('https://api.angel.co/1/search?query=' + company + '&type=Startup', function(err, response, body){
+      dataJSON1 = JSON.parse(body);
+      done(null, "done getting id")
+    })
+  }
+
+  // var getCompanyInfo = function(done){
+  //   request() {
+
+  //   }
+  // }
+  var getCompanyInfo = function(done){
+    angelId = dataJSON1[0].id;
+    request('https://api.angel.co/1/startups/' + angelId, function(err, response, body){
+      dataJSON2 = JSON.parse(body);
+      done(null, "done getting company info")
+    })
+  }
+
+  var getEmployees = function(done) {
+    request('https://api.angel.co/1/startup_roles?v=1&startup_id=' + angelId, function(err, response, body) {
+      dataJSON3 = JSON.parse(body).startup_roles;
+      done(null, "done getting company users");
+    })
+  }
+
+  var doneTasks = function(err, results) {
+    if(err) console.log(err);
+    console.log(results);
+    console.log('dataJSON2: ', dataJSON2);
+    dataObj['companyInfo'] = dataJSON2;
+    dataObj['employees'] = dataJSON3;
+    res.send(dataObj);
+  }
+  async.series([getId, getCompanyInfo, getEmployees], doneTasks);
+}
 // Get list of angels
 exports.index = function(req, res) {
   Angel.find(function (err, angels) {

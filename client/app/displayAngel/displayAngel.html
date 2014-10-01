@@ -1,0 +1,22 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="col-md-12">
+  <div class="container">
+    <h4>This is the displayAngel view.</h4>
+    <form>
+      <p>Type in company name</p>
+      <input ng-model="company">
+      <button ng-click="Angel.getAngel(company)">Get Angel List Data</button>
+    </form>
+    <br></br>
+    <h4>{{companyData.companyInfo.name}}</h4>
+    <h4 ng-if="companyData">People</h4>
+    <ul ng-repeat="employee in companyData.employees">
+      <li>
+        <h5>{{employee.tagged.name}}</h5>
+        <p>Role: {{employee.role}}
+        <p ng-show="employee.title && employee.title !== ''">Title: {{employee.title}}</p>
+      </li>
+    </ul>
+  </div>
+</div>
