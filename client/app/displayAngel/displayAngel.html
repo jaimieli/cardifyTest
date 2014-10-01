@@ -28,16 +28,16 @@
     </ul>
   </div>
   <div ng-if="userData" class="container">
-    <h1>{{userData.name}}</h1>
-    <img src="userData.image"/>
-    <p><a href="{{userData.linkedin_url}}" target="_blank">LinkedIn</a></p>
-    <p ng-if="userData.bio">{{userData.bio}}</p>
-    <h4 ng-if="userData.roles">Roles</h4>
-    <ul ng-repeat="role in userData.roles">
+    <h1>{{userData.aboutUser.name}}</h1>
+    <img src="userData.aboutUser.image">
+    <p><a href="{{userData.aboutUser.linkedin_url}}" target="_blank">LinkedIn</a></p>
+    <p ng-if="userData.aboutUser.bio">{{userData.aboutUser.bio}}</p>
+    <h4 ng-if="userData.aboutUser.roles">Roles</h4>
+    <ul ng-repeat="role in userData.aboutUser.roles">
       <li>{{role.display_name}}</li>
     </ul>
-    <h4 ng-if="userData.skills">Skills</h4>
-    <ul ng-repeat="skill in userData.skills">
+    <h4 ng-if="userData.aboutUser.skills">Skills</h4>
+    <ul ng-repeat="skill in userData.aboutUser.skills">
       <li>{{skill.display_name}} (Level: {{skill.level}})</li>
     </ul>
   </div>

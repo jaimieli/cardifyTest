@@ -75,10 +75,36 @@ exports.getUser = function(req, res){
   console.log('getUser backend');
   var user = req.params.id;
   var dataJSON5;
-  request('https://api.angel.co/1/users/' + user, function(err, response, body){
-    dataJSON5 = JSON.parse(body);
-    res.send(dataJSON5);
+  var dataJSON6;
+  var dataObj = {};
+
+  var aboutUser = function(callback) {
+    request('https://api.angel.co/1/users/' + user, function(err, response, body){
+      dataJSON5 = JSON.parse(body);
+      callback();
+    }), function(err) {
+      if (err) console.log(err);
+      callback()
+    }
+  }
+
+  var startupRoles = function(callback){
+    request(' https://api.angel.co/1/startup_roles?v=1&user_id=' + user, function(err, response, body){
+      dataJSON6 = JSON.parse(body).startup_roles;
+      callback();
+    }), function(err) {
+      if (err) console.log(err);
+      callback();
+    }
+  }
+
+  async.parallel([aboutUser, startupRoles], function(err, results){
+    if (err) console.log(err);
+    dataObj.aboutUser = dataJSON5;
+    dataObj.startupRoles = dataJSON6;
+    res.send(dataObj);
   })
+
 };
 
 // Get list of angels
