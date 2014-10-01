@@ -12,6 +12,9 @@ module.exports = {
   TWITTER_ID:       'app-id',
   TWITTER_SECRET:   'secret',
 
+  LINKEDIN_ID: '77sd8l8fu10zbc',
+  LINKEDIN_SECRET: 'UFgWoulE4sk4kWqb',
+
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
 };

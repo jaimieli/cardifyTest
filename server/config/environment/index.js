@@ -47,6 +47,12 @@ var all = {
     callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
   },
 
+  linkedin: {
+    clientID: process.env.LINKEDIN_ID || '77sd8l8fu10zbc',
+    clientSecret: process.env.LINKEDIN_SECRET || 'UFgWoulE4sk4kWqb',
+    callbackURL: (process.env.DOMAIN || 'http://localhost:9000') + '/auth/linkedin/callback'
+  }
+
 };
 
 // Export the config object based on the NODE_ENV
