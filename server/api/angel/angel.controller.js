@@ -16,6 +16,8 @@ exports.getAngel = function(req, res) {
   var dataObj = {};
   var dataJSON2;
   var dataJSON3;
+  var dataJSON3FilteredStaff;
+  var dataJSON3FilteredFounders;
   var dataJSON4;
 
   var getId = function(done) {
@@ -65,7 +67,48 @@ exports.getAngel = function(req, res) {
     }
     async.parallel([getCompanyInfo, getEmployees, getJobs], function(err, results){
       if(err) console.log(err);
+      // // filter out employees that don't have a title
+      // dataJSON3FilteredStaff = dataJSON3.filter(function(x) {
+      //   return !((x.role === "employee" && x.title === "") || (x.role === "employee" && x.title === null));
+      // })
+      // // end of filter
+      // // filter for founders
+      // dataJSON3FilteredFounders = dataJSON3.filter(function(x){
+      //   return x.role === "founder";
+      // })
+      // // end of filter
       done(null, "done getting company info, employees, and jobs")
+    })
+  }
+
+  var filterEmployees = function(done) {
+    console.log('filtering employees')
+    var getFounders = function(callback) {
+      console.log('getting founders')
+      dataJSON3FilteredFounders = dataJSON3.filter(function(x){
+        return x.role === "founder";
+      })
+      callback(), function(err) {
+        if(err) console.log(err);
+        callback();
+      }
+    };
+
+    var getTitledStaff = function(callback) {
+      console.log('getting titled staff')
+      dataJSON3FilteredStaff = dataJSON3.filter(function(x) {
+        return !((x.role === "employee" && x.title === "") || (x.role === "employee" && x.title === null));
+      })
+      callback(),
+      function(err) {
+        if (err) console.log(err);
+        callback();
+      }
+    }
+
+    async.parallel([getFounders, getTitledStaff], function(err, results){
+      if (err) console.log(err)
+      done(null, "done filtering employee data")
     })
   }
 
@@ -73,11 +116,13 @@ exports.getAngel = function(req, res) {
     if(err) console.log(err);
     console.log(results);
     dataObj.companyInfo = dataJSON2;
-    dataObj.employees = dataJSON3;
+    dataObj.allEmployees = dataJSON3;
     dataObj.jobs = dataJSON4;
+    dataObj.staffFiltered = dataJSON3FilteredStaff;
+    dataObj.foundersOnly = dataJSON3FilteredFounders;
     res.send(dataObj);
   }
-  async.series([getId, getCompanyEmployessAndJobs], doneTasks);
+  async.series([getId, getCompanyEmployessAndJobs, filterEmployees], doneTasks);
 }
 
 // get data for a specific user

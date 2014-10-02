@@ -11,23 +11,45 @@
     <br></br>
     <h4 ng-if="companyData.companyInfo.name">{{companyData.companyInfo.name}}</h4>
     <p ng-if="companyData.companyInfo.product_desc">{{companyData.companyInfo.product_desc}}</p>
-    <h4 ng-if="companyData.jobs">Jobs</h4>
-    <ul ng-repeat="job in companyData.jobs">
-      <li>
-        <h5>{{job.title}}</h5>
-        <p>Salary Range: ${{job.salary_min}} - ${{job.salary_max}}</p>
-        <p>Equity Range: {{job.equity_min}}% - {{job.equity_max}}%</p>
-        <a href="{{job.jobUrl}}" target="_blank">Learn More</a>
-      </li>
-    </ul>
-    <h4 ng-if="companyData.employees">People</h4>
-    <ul ng-repeat="employee in companyData.employees">
-      <li>
-        <h5 ng-click="Angel.getEmployee(employee.tagged.id)">{{employee.tagged.name}}</h5>
-        <p>Role: {{employee.role}}</p>
-        <p ng-show="employee.title && employee.title !== ''">Title: {{employee.title}}</p>
-      </li>
-    </ul>
+    <div ng-if="companyData.jobs">
+      <h4>Jobs</h4>
+      <ul ng-repeat="job in companyData.jobs">
+        <li>
+          <h5>{{job.title}}</h5>
+          <p>Salary Range: ${{job.salary_min}} - ${{job.salary_max}}</p>
+          <p>Equity Range: {{job.equity_min}}% - {{job.equity_max}}%</p>
+          <a href="{{job.jobUrl}}" target="_blank">Learn More</a>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="companyData.foundersOnly">
+      <h4>Founders</h4>
+      <ul ng-repeat="founder in companyData.foundersOnly">
+        <li>
+          <h5 ng-click="Angel.getEmployee(founder.tagged.id)">{{founder.tagged.name}}</h5>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="companyData.staffFiltered">
+      <h4>People with Titles</h4>
+      <ul ng-repeat="staff in companyData.staffFiltered">
+        <li>
+          <h5 ng-click="Angel.getEmployee(staff.tagged.id)">{{staff.tagged.name}}</h5>
+          <p>Role: {{staff.role}}</p>
+          <p ng-show="staff.title && staff.title !== ''">Title: {{staff.title}}</p>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="companyData.allEmployees">
+      <h4>Everyone</h4>
+      <ul ng-repeat="employee in companyData.allEmployees">
+        <li>
+          <h5 ng-click="Angel.getEmployee(employee.tagged.id)">{{employee.tagged.name}}</h5>
+          <p>Role: {{employee.role}}</p>
+          <p ng-show="employee.title && employee.title !== ''">Title: {{employee.title}}</p>
+        </li>
+      </ul>
+    </div>
   </div>
   <div ng-if="userData" class="container">
     <h1>{{userData.aboutUser.name}}</h1>
