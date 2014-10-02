@@ -50,6 +50,25 @@
         </li>
       </ul>
     </div>
+    <p ng-if="companyData.companyInfo.facebook_url"><a href="{{companyData.companyInfo.facebook_url}}" target="_blank">Facebook</a></p>
+
+    <p ng-if="companyData.companyInfo.twitter_url"><a href="{{companyData.companyInfo.twitter_url}}" target="_blank">Twitter</a></p>
+
+    <h4 ng-if="companyData.jobs">Jobs</h4>
+    <ul ng-repeat="job in companyData.jobs">
+      <li>
+        <h5>{{job.title}}</h5>
+        <p>Salary Range: ${{job.salary_min}} - ${{job.salary_max}}</p>
+      </li>
+    </ul>
+    <h4 ng-if="companyData.employees">People</h4>
+    <ul ng-repeat="employee in companyData.employees">
+      <li>
+        <h5 ng-click="Angel.getEmployee(employee.tagged.id)">{{employee.tagged.name}}</h5>
+        <p>Role: {{employee.role}}
+        <p ng-show="employee.title && employee.title !== ''">Title: {{employee.title}}</p>
+      </li>
+    </ul>
   </div>
   <div ng-if="userData" class="container">
     <h1>{{userData.aboutUser.name}}</h1>
