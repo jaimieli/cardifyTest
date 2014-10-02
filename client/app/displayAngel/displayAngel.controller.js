@@ -13,6 +13,15 @@ angular.module('cardifyTestApp')
     $http.get('/api/angels/getAngel/' + $stateParams.company).success(function(data){
         console.log('Company Data: ', data);
         $scope.companyData = data;
+        $scope.companyData.jobs.forEach(function(el){
+          el.salary_max_display = '$' + numberWithCommas(el.salary_max);
+          el.salary_min_display = '$' + numberWithCommas(el.salary_min);
+        });
+        // format funding to have commas + $
+        $scope.companyData.crunchbase.properties.total_funding_usd_display = '$' + numberWithCommas($scope.companyData.crunchbase.properties.total_funding_usd);
+        // format date
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        $scope.companyData.crunchbase.properties.founded_on_display = months[$scope.companyData.crunchbase.properties.founded_on_month - 1] + ' ' + $scope.companyData.crunchbase.properties.founded_on_day + ', ' + $scope.companyData.crunchbase.properties.founded_on_year;
       });
     $scope.message = 'Hello';
     this.getAngel = function(company) {

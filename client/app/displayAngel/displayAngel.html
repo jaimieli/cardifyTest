@@ -10,68 +10,36 @@
     </form>
   </div>
   <button class="sidebarBtn" ng-click="Angel.sideBar()">Start Another Search</button>
+  <br></br>
 
-    <br></br>
-    <h4 ng-if="companyData.companyInfo.name">{{companyData.companyInfo.name}}</h4>
+  <h1>MAIN PAGE</h1>
+  <h4 ng-if="companyData.companyInfo.name">{{companyData.companyInfo.name}}</h4>
+  <p ng-if="companyData.companyInfo.product_desc">{{companyData.companyInfo.product_desc}}</p>
+  <p ng-if="companyData.companyInfo.company_url"><a href="{{companyData.companyInfo.company_url}}" target="_blank">Company Website</a></p>
+  <div ng-if="companyData.foundersOnly">
+    <h4>Founders</h4>
+    <ul ng-repeat="founder in companyData.foundersOnly">
+      <li>
+        <h5 ng-click="Angel.getEmployee(employee.tagged.id)">{{founder.tagged.name}}</h5>
+        <p>{{founder.tagged.bio}}</p>
+        <img src="{{founder.tagged.image}}"/>
+      </li>
+    </ul>
+  </div>
+  <div ng-if="companyData.crunchbase">
+    <h4>Total Funding</h4>
+    <p>{{companyData.crunchbase.properties.total_funding_usd_display}}</p>
+  </div>
     <p ng-if="companyData.companyInfo.facebook_url"><a href="{{companyData.companyInfo.facebook_url}}" target="_blank">Facebook</a></p>
+
     <p ng-if="companyData.companyInfo.twitter_url"><a href="{{companyData.companyInfo.twitter_url}}" target="_blank">Twitter</a></p>
+
     <p ng-if="companyData.companyInfo.blog_url"><a href="{{companyData.companyInfo.blog_url}}" target="_blank">Blog</a></p>
-    <p ng-if="companyData.companyInfo.product_desc">{{companyData.companyInfo.product_desc}}</p>
-
-    <p ng-if="companyData.companyInfo.company_url"><a href="{{companyData.companyInfo.company_url}}" target="_blank">Company Website</a></p>
-
-    <p ng-if="companyData.companyInfo.facebook_url"><a href="{{companyData.companyInfo.facebook_url}}" target="_blank">Facebook</a></p>
-
-    <p ng-if="companyData.companyInfo.twitter_url"><a href="{{companyData.companyInfo.twitter_url}}" target="_blank">Twitter</a></p>
-
-    <p ng-if="companyData.companyInfo.blog"><a href="{{companyData.companyInfo.blog_url}}" target="_blank">Blog</a></p>
 
     <p ng-if="companyData.crunchbase.properties.founded_on">Founded on: {{companyData.crunchbase.properties.founded_on_display}}</p>
-    <div ng-if="companyData.crunchbase">
-      <h4>Total Funding</h4>
-      <p>{{companyData.crunchbase.properties.total_funding_usd_display}}</p>
-    </div>
-    <button ng-if="companyData.crunchbase.relationships.news.items" ng-click="Angel.getNews(companyData.crunchbase.relationships.news.items)">Get News</button>
-    <div ng-if="articleText">
-      <ul ng-repeat="article in articleText">
-        <li>
-          <a href="{{article.url}}">{{article.title}}</a>
-          <p>{{article.body | limitTo: 400}}</p>
-        </li>
-      </ul>
-    </div>
-    <div ng-if="companyData.jobs">
-      <h4>Jobs</h4>
-      <ul ng-repeat="job in companyData.jobs">
-        <li>
-          <h5>{{job.title}}</h5>
-          <p>Salary Range: {{job.salary_min_display}} - {{job.salary_max_display}}</p>
-          <p>Equity Range: {{job.equity_min}}% - {{job.equity_max}}%</p>
-          <a href="{{job.jobUrl}}" target="_blank">Learn More</a>
-        </li>
-      </ul>
-    </div>
-    <div ng-if="companyData.foundersOnly">
-      <h4>Founders</h4>
-      <ul ng-repeat="founder in companyData.foundersOnly">
-        <li>
-          <h5 ng-click="Angel.getEmployee(employee.tagged.id)">{{founder.tagged.name}}</h5>
-          <p>{{founder.tagged.bio}}</p>
-          <img src="{{founder.tagged.image}}"/>
-        </li>
-      </ul>
-    </div>
-    <div ng-if="companyData.staffFiltered">
-      <h4>People with Titles</h4>
-      <ul ng-repeat="staff in companyData.staffFiltered">
-        <li>
-          <h5 ng-click="Angel.getEmployee(staff.tagged.id)">{{staff.tagged.name}}</h5>
-          <p>Role: {{staff.role}}</p>
-          <p ng-show="staff.title && staff.title !== ''">Title: {{staff.title}}</p>
-        </li>
-      </ul>
-    </div>
-    <div ng-if="companyData.allEmployees">
+
+  <h1>TEAM PAGE</h1>
+  <div ng-if="companyData.allEmployees">
       <h4>Everyone</h4>
       <ul ng-repeat="employee in companyData.allEmployees">
         <li>
@@ -80,28 +48,8 @@
           <p ng-show="employee.title && employee.title !== ''">Title: {{employee.title}}</p>
         </li>
       </ul>
-    </div>
-
-    <!-- <h4 ng-if="companyData.jobs">Jobs</h4>
-    <ul ng-repeat="job in companyData.jobs">
-      <li>
-        <h5>{{job.title}}</h5>
-        <p>Salary Range: ${{job.salary_min}} - ${{job.salary_max}}</p>
-      </li>
-    </ul>
-
-    <h4 ng-if="companyData.employees">People</h4>
-    <ul ng-repeat="employee in companyData.employees">
-      <li>
-        <h5 ng-click="Angel.getEmployee(employee.tagged.id)">{{employee.tagged.name}}</h5>
-        <p>Role: {{employee.role}}
-        <p ng-show="employee.title && employee.title !== ''">Title: {{employee.title}}</p>
-      </li>
-    </ul> -->
-  </div>
-  <div ng-if="userData" class="container">
+      <div ng-if="userData" class="container">
     <h1>{{userData.aboutUser.name}}</h1>
-
     <img src="{{userData.aboutUser.image}}">
     <p ng-if="userData.aboutUser.linkedin_url"><a href="{{userData.aboutUser.linkedin_url}}" target="_blank">LinkedIn</a></p>
     <div ng-if="userData.aboutUser.bio">
@@ -121,5 +69,60 @@
         <li>{{skill.display_name}} (Level: {{skill.level}})</li>
       </ul>
     </div>
+  </div>
+    </div>
+
+    <h1>NEWS PAGE</h1>
+    <button ng-if="companyData.crunchbase.relationships.news.items" ng-click="Angel.getNews(companyData.crunchbase.relationships.news.items)">Get News</button>
+    <div ng-if="articleText">
+      <ul ng-repeat="article in articleText">
+        <li>
+          <a href="{{article.url}}">{{article.title}}</a>
+          <p>{{article.body | limitTo: 400}}</p>
+        </li>
+      </ul>
+    </div>
+
+    <h1>JOBS PAGE</h1>
+    <div ng-if="companyData.jobs">
+      <h4>Jobs</h4>
+      <ul ng-repeat="job in companyData.jobs">
+        <li>
+          <h5>{{job.title}}</h5>
+          <p>Salary Range: {{job.salary_min_display}} - {{job.salary_max_display}}</p>
+          <p>Equity Range: {{job.equity_min}}% - {{job.equity_max}}%</p>
+          <a href="{{job.jobUrl}}" target="_blank">Learn More</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- <div ng-if="companyData.staffFiltered">
+      <h4>People with Titles</h4>
+      <ul ng-repeat="staff in companyData.staffFiltered">
+        <li>
+          <h5 ng-click="Angel.getEmployee(staff.tagged.id)">{{staff.tagged.name}}</h5>
+          <p>Role: {{staff.role}}</p>
+          <p ng-show="staff.title && staff.title !== ''">Title: {{staff.title}}</p>
+        </li>
+      </ul>
+    </div> -->
+
+
+    <!-- <h4 ng-if="companyData.jobs">Jobs</h4>
+    <ul ng-repeat="job in companyData.jobs">
+      <li>
+        <h5>{{job.title}}</h5>
+        <p>Salary Range: ${{job.salary_min}} - ${{job.salary_max}}</p>
+      </li>
+    </ul>
+
+    <h4 ng-if="companyData.employees">People</h4>
+    <ul ng-repeat="employee in companyData.employees">
+      <li>
+        <h5 ng-click="Angel.getEmployee(employee.tagged.id)">{{employee.tagged.name}}</h5>
+        <p>Role: {{employee.role}}
+        <p ng-show="employee.title && employee.title !== ''">Title: {{employee.title}}</p>
+      </li>
+    </ul> -->
   </div>
 </div>
