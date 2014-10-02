@@ -2,11 +2,17 @@
 
 angular.module('cardifyTestApp')
   .controller('DisplayangelCtrl', function ($scope, $http) {
-    $scope.message = 'Hello';
     this.getAngel = function(company) {
+      // reset scope variables when searching for a new company
+      $scope.userData = null;
+      $scope.companyData = null;
+      $scope.articleText = null;
+
+      // no search input
       if(company === undefined) {
         return;
       }
+
       $http.get('/api/angels/getAngel/' + company).success(function(data){
         console.log('Company Data: ', data);
         $scope.companyData = data;

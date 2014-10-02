@@ -12,7 +12,7 @@
     <h4 ng-if="companyData.companyInfo.name">{{companyData.companyInfo.name}}</h4>
     <p ng-if="companyData.companyInfo.product_desc">{{companyData.companyInfo.product_desc}}</p>
     <p ng-if="companyData.crunchbase.properties.founded_on">Founded on: {{companyData.crunchbase.properties.founded_on}}</p>
-    <button ng-if="companyData.crunchbase.relationships.news.items" ng-click="Angel.getNews(companyData.crunchbase.relationships.news.items)">Get News with body text</button>
+    <button ng-if="companyData.crunchbase.relationships.news.items" ng-click="Angel.getNews(companyData.crunchbase.relationships.news.items)">Get News</button>
     <div ng-if="articleText">
       <ul ng-repeat="article in articleText">
         <li>
