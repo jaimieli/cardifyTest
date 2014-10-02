@@ -1,27 +1,20 @@
 'use strict';
 
 angular.module('cardifyTestApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+  .controller('MainCtrl', function ($scope, $http, socket, $location) {
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
-    });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
+    $scope.message = 'Hello';
+    this.getAngel = function(company) {
+      if(company === undefined) {
         return;
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
+      $location.path('/displayAngel/' + company);
+    }
+    this.getEmployee = function(user) {
+      console.log('id: ', user)
+      $http.get('/api/angels/getUser/' + user).success(function(data){
+        console.log('User Data: ', data);
+        $scope.userData = data;
+      })
+    }
   });

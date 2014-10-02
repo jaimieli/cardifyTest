@@ -1,11 +1,20 @@
 'use strict';
 
 angular.module('cardifyTestApp')
-  .controller('DisplayangelCtrl', function ($scope, $http) {
+  .controller('DisplayangelCtrl', function ($scope, $http, $stateParams) {
     // format number to have commas
     var numberWithCommas = function(x){
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+    this.sideBar = function() {
+      $scope.boolChangeClass = !$scope.boolChangeClass;
+    }
+
+    $http.get('/api/angels/getAngel/' + $stateParams.company).success(function(data){
+        console.log('Company Data: ', data);
+        $scope.companyData = data;
+      });
+    $scope.message = 'Hello';
     this.getAngel = function(company) {
       // reset scope variables when searching for a new company
       $scope.userData = null;
