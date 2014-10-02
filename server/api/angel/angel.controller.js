@@ -188,7 +188,6 @@ exports.getNews = function(req, res) {
     alchemy.text(newsObj.url, {}, function(err, response) {
       if(err) console.log(err);
       newsObj.body = response.text;
-      console.log('newsObj body: ', newsObj)
       doneGetOneText();
     });
   };
