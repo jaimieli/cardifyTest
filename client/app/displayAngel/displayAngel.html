@@ -2,14 +2,20 @@
 
 <div class="col-md-12">
   <div class="container">
-    <h4>This is the displayAngel view.</h4>
-    <form>
-      <p>Type in company name</p>
-      <input ng-model="company" required>
-      <button ng-click="Angel.getAngel(company)">Get Angel List Data</button>
+  <div class="sidebar" ng-class="{'slide-out':boolChangeClass}">
+    <form class="sidebarForm">
+      <p>Search Startup</p>
+      <input class="sidebarInput" ng-model="company" required>
+      <button ng-click="Angel.getAngel(company)">Search</button>
     </form>
+  </div>
+  <button class="sidebarBtn" ng-click="Angel.sideBar()">Start Another Search</button>
+
     <br></br>
     <h4 ng-if="companyData.companyInfo.name">{{companyData.companyInfo.name}}</h4>
+    <p ng-if="companyData.companyInfo.facebook_url"><a href="{{companyData.companyInfo.facebook_url}}" target="_blank">Facebook</a></p>
+    <p ng-if="companyData.companyInfo.twitter_url"><a href="{{companyData.companyInfo.twitter_url}}" target="_blank">Twitter</a></p>
+    <p ng-if="companyData.companyInfo.blog_url"><a href="{{companyData.companyInfo.blog_url}}" target="_blank">Blog</a></p>
     <p ng-if="companyData.companyInfo.product_desc">{{companyData.companyInfo.product_desc}}</p>
     <div ng-if="companyData.jobs">
       <h4>Jobs</h4>
@@ -50,11 +56,9 @@
         </li>
       </ul>
     </div>
-    <p ng-if="companyData.companyInfo.facebook_url"><a href="{{companyData.companyInfo.facebook_url}}" target="_blank">Facebook</a></p>
 
-    <p ng-if="companyData.companyInfo.twitter_url"><a href="{{companyData.companyInfo.twitter_url}}" target="_blank">Twitter</a></p>
 
-    <h4 ng-if="companyData.jobs">Jobs</h4>
+    <!-- <h4 ng-if="companyData.jobs">Jobs</h4>
     <ul ng-repeat="job in companyData.jobs">
       <li>
         <h5>{{job.title}}</h5>
@@ -68,12 +72,12 @@
         <p>Role: {{employee.role}}
         <p ng-show="employee.title && employee.title !== ''">Title: {{employee.title}}</p>
       </li>
-    </ul>
+    </ul> -->
   </div>
   <div ng-if="userData" class="container">
     <h1>{{userData.aboutUser.name}}</h1>
     <img src="userData.aboutUser.image">
-    <p><a href="{{userData.aboutUser.linkedin_url}}" target="_blank">LinkedIn</a></p>
+    <p ng-if="userData.aboutUser.linkedin_url"><a href="{{userData.aboutUser.linkedin_url}}" target="_blank">LinkedIn</a></p>
     <div ng-if="userData.aboutUser.bio">
       <h4>Bio</h4>
       <p ng-if="userData.aboutUser.bio">{{userData.aboutUser.bio}}</p>

@@ -1,0 +1,36 @@
+.sidebar {
+    -moz-transition: left 1s;
+    -webkit-transition: left 1s;
+    -o-transition: left 1s;
+    transition: left 1s;
+    width: 300px;
+    background-color: #46BAE8;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: -300px;
+}
+
+.slide-out {
+    -moz-transition: left 1s;
+    -webkit-transition: left 1s;
+    -o-transition: left 1s;
+    transition: left 1s;
+    left: 0px;
+}
+
+.sidebarBtn {
+  margin-left: 300px;
+}
+
+.sidebarForm {
+  padding: 10px;
+}
+
+.sidebarForm p {
+  text-align: center;
+}
+
+.sidebarInput {
+
+}

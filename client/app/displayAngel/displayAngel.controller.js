@@ -1,7 +1,16 @@
 'use strict';
 
 angular.module('cardifyTestApp')
-  .controller('DisplayangelCtrl', function ($scope, $http) {
+  .controller('DisplayangelCtrl', function ($scope, $http, $stateParams) {
+
+    this.sideBar = function() {
+      $scope.boolChangeClass = !$scope.boolChangeClass;
+    }
+
+    $http.get('/api/angels/getAngel/' + $stateParams.company).success(function(data){
+        console.log('Company Data: ', data);
+        $scope.companyData = data;
+      });
     $scope.message = 'Hello';
     this.getAngel = function(company) {
       if(company === undefined) {
@@ -19,4 +28,7 @@ angular.module('cardifyTestApp')
         $scope.userData = data;
       })
     }
+
+
+
   });
