@@ -11,6 +11,13 @@
     <br></br>
     <h4 ng-if="companyData.companyInfo.name">{{companyData.companyInfo.name}}</h4>
     <p ng-if="companyData.companyInfo.product_desc">{{companyData.companyInfo.product_desc}}</p>
+
+    <p ng-if="companyData.companyInfo.facebook_url"><a href="{{companyData.companyInfo.facebook_url}}" target="_blank">Facebook</a></p>
+
+    <p ng-if="companyData.companyInfo.twitter_url"><a href="{{companyData.companyInfo.twitter_url}}" target="_blank">Twitter</a></p>
+
+    <p ng-if="companyData.companyInfo.blog"><a href="{{companyData.companyInfo.blog_url}}" target="_blank">Blog</a></p>
+
     <p ng-if="companyData.crunchbase.properties.founded_on">Founded on: {{companyData.crunchbase.properties.founded_on}}</p>
     <button ng-if="companyData.crunchbase.relationships.news.items" ng-click="Angel.getNews(companyData.crunchbase.relationships.news.items)">Get News</button>
     <div ng-if="articleText">
@@ -64,17 +71,6 @@
         </li>
       </ul>
     </div>
-    <p ng-if="companyData.companyInfo.facebook_url"><a href="{{companyData.companyInfo.facebook_url}}" target="_blank">Facebook</a></p>
-
-    <p ng-if="companyData.companyInfo.twitter_url"><a href="{{companyData.companyInfo.twitter_url}}" target="_blank">Twitter</a></p>
-
-    <h4 ng-if="companyData.jobs">Jobs</h4>
-    <ul ng-repeat="job in companyData.jobs">
-      <li>
-        <h5>{{job.title}}</h5>
-        <p>Salary Range: ${{job.salary_min}} - ${{job.salary_max}}</p>
-      </li>
-    </ul>
     <h4 ng-if="companyData.employees">People</h4>
     <ul ng-repeat="employee in companyData.employees">
       <li>
