@@ -19,4 +19,10 @@ angular.module('cardifyTestApp')
         $scope.userData = data;
       })
     }
+    this.getNews = function(newsObj){
+      $http.post('/api/angels/getNews', newsObj).success(function(data) {
+        console.log('News Text: ', data);
+        $scope.articleText = data;
+      })
+    }
   });

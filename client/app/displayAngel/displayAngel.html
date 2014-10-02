@@ -11,6 +11,20 @@
     <br></br>
     <h4 ng-if="companyData.companyInfo.name">{{companyData.companyInfo.name}}</h4>
     <p ng-if="companyData.companyInfo.product_desc">{{companyData.companyInfo.product_desc}}</p>
+    <p ng-if="companyData.crunchbase.properties.founded_on">Founded on: {{companyData.crunchbase.properties.founded_on}}</p>
+    <button ng-if="companyData.crunchbase.relationships.news.items" ng-click="Angel.getNews(companyData.crunchbase.relationships.news.items)">Get News with body text</button>
+    <div ng-if="articleText">
+      <ul ng-repeat="article in articleText">
+        <li>
+          <a href="{{article.url}}">{{article.title}}</a>
+          <p>{{article.body | limitTo: 400}}</p>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="companyData.crunchbase">
+      <h4>Total Funding</h4>
+      <p>${{companyData.crunchbase.properties.total_funding_usd}}</p>
+    </div>
     <div ng-if="companyData.jobs">
       <h4>Jobs</h4>
       <ul ng-repeat="job in companyData.jobs">

@@ -5,6 +5,7 @@ var controller = require('./angel.controller');
 
 var router = express.Router();
 
+router.post('/getNews', controller.getNews);
 router.get('/getAngel/:id', controller.getAngel);
 router.get('/getUser/:id', controller.getUser)
 router.get('/', controller.index);
