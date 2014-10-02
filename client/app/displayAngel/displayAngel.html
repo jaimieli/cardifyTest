@@ -11,6 +11,11 @@
     <br></br>
     <h4 ng-if="companyData.companyInfo.name">{{companyData.companyInfo.name}}</h4>
     <p ng-if="companyData.companyInfo.product_desc">{{companyData.companyInfo.product_desc}}</p>
+
+    <p ng-if="companyData.companyInfo.facebook_url"><a href="{{companyData.companyInfo.facebook_url}}" target="_blank">Facebook</a></p>
+
+    <p ng-if="companyData.companyInfo.twitter_url"><a href="{{companyData.companyInfo.twitter_url}}" target="_blank">Twitter</a></p>
+
     <h4 ng-if="companyData.jobs">Jobs</h4>
     <ul ng-repeat="job in companyData.jobs">
       <li>
