@@ -9,9 +9,9 @@
             </form>
           </div>
           <li ng-click="Angel.show('company')"><img src="/assets/images/briefcase.svg">Company</li>
-          <li ng-click="Angel.show('team')"><img src="/assets/images/head.svg">Team</li>
+          <li ng-if="companyData.allEmployees" ng-click="Angel.show('team')"><img src="/assets/images/head.svg">Team</li>
           <li ng-if="companyData.crunchbase.relationships.news.items" ng-click="Angel.show('news'); Angel.getNews(companyData.crunchbase.relationships.news.items)"><img src="/assets/images/paper.svg">News</li>
-          <li ng-click="Angel.show('jobs')"><img src="/assets/images/flag.svg">Jobs</li>
+          <li ng-if="companyData.jobs" ng-click="Angel.show('jobs')"><img src="/assets/images/flag.svg">Jobs</li>
         </ul>
       </section>
 
@@ -63,7 +63,8 @@
             <li class="employeeList col-md-3" ng-click="Angel.getEmployee(employee.tagged.id)">
               <img src="{{employee.tagged.image}}">
               <h5>{{employee.tagged.name}}</h5>
-              <p>{{employee.role}}</p>
+              <p ng-if="employee.title">{{employee.title}}</p>
+              <p ng-hide="employee.title">{{employee.role}}</p>
             </li>
           </ul>
         </div>
