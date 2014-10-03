@@ -1,36 +1,217 @@
+// COMPANY VIEW
 .sidebar {
-    -moz-transition: left 1s;
-    -webkit-transition: left 1s;
-    -o-transition: left 1s;
-    transition: left 1s;
-    width: 300px;
-    background-color: #46BAE8;
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: -300px;
-}
-
-.slide-out {
-    -moz-transition: left 1s;
-    -webkit-transition: left 1s;
-    -o-transition: left 1s;
-    transition: left 1s;
-    left: 0px;
-}
-
-.sidebarBtn {
-  margin-left: 300px;
-}
-
-.sidebarForm {
-  padding: 10px;
-}
-
-.sidebarForm p {
-  text-align: center;
+  margin-top: 60px;
 }
 
 .sidebarInput {
-
+  margin-bottom: 30px;
+  width: 150px;
 }
+
+.menuSection ul {
+  list-style: none;
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 16px;
+  margin-top: 60px;
+  padding-left: 0px;
+  position: fixed;
+}
+
+.menuSection li {
+  margin-bottom: 30px;
+}
+
+.menuSection img {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
+.contentSec {
+  border-left: 3px solid #46BAE8;
+  margin-bottom: 60px;
+  margin-top: 120px;
+}
+
+.mainBlurb {
+  float: left;
+}
+
+.companyHeader {
+  margin-right: 10px;
+  font-family: Lato;
+}
+
+.headingIcons {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.headingIcons li {
+  display: inline-block;
+}
+
+.headingIcons img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  margin-bottom: 13px;
+}
+
+.companyDescription {
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: justify;
+  line-height: 24px;
+  margin-top: -13px;
+  margin-bottom: 15px;
+}
+
+.foundersData {
+  margin-left: -40px;
+}
+
+.foundersTitle {
+  margin-left: 40px;
+}
+
+.foundersSec {
+  list-style: none;
+  float: left;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.foundersSec img {
+  height: 180px;
+  width: 180px;
+  margin-right: 30px;
+}
+
+.foundersSec h5 {
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+  margin-left: -30px;
+}
+
+h4 {
+  font-family: Lato;
+  font-size: 18px;
+}
+
+.rightInfo {
+  margin-top: 170px;
+}
+
+.rightInfo p {
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+// TEAM VIEW
+
+.employeeSec {
+  margin-left: -80px;
+}
+
+.employeeList {
+  display: inline-block;
+  width: 260px;
+  height: 260px;
+  }
+
+.employeeList img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 180px;
+  height: 180px;
+}
+
+.employeeList h5 {
+  font-family: Lato;
+  font-size: 16px;
+  text-align: center;
+}
+
+.employeeList p {
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+}
+
+// NEWS VIEW
+.allArticles a {
+  margin-left: 0px;
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
+}
+
+.allArticles a:hover {
+  text-decoration: none;
+}
+
+.allArticles p {
+  margin-left: 0px;
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 16px;
+  margin-bottom: 0px;
+}
+
+.oneArticle {
+  list-style: none;
+  background-color: #eee;
+  margin-bottom: 30px;
+  padding: 20px;
+  margin-left: -40px;
+}
+
+.oneArticle span {
+  color: #46BAE8;
+}
+
+// JOBS VIEW
+.allListings {
+  margin-left: -40px;
+}
+
+.jobListing {
+  background-color: #eee;
+  list-style: none;
+  padding: 15px;
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.jobListing h5 {
+  font-weight: 700;
+  font-family: Lato;
+  font-size: 16px;
+}
+
+.jobListing a:hover {
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+

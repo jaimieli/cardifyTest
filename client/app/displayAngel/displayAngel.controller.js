@@ -2,6 +2,40 @@
 
 angular.module('cardifyTestApp')
   .controller('DisplayangelCtrl', function ($scope, $http, $stateParams) {
+    $scope.showCompany = true;
+    $scope.showTeam = false;
+    $scope.showNews = false;
+    $scope.showJobs = false;
+    this.show = function (section) {
+      if (section === 'company') {
+        $scope.showCompany = true;
+        $scope.showTeam = false;
+        $scope.showNews = false;
+        $scope.showJobs = false;
+      }
+      if (section === 'team') {
+        $scope.showTeam = true;
+        $scope.showCompany = false;
+        $scope.showNews = false;
+        $scope.showJobs = false;
+      }
+      if (section === 'news') {
+        $scope.showNews = true;
+        $scope.showTeam = false;
+        $scope.showCompany = false;
+        $scope.showJobs = false;
+      }
+      if (section === 'jobs') {
+        $scope.showJobs = true;
+        $scope.showTeam = false;
+        $scope.showCompany = false;
+        $scope.showNews = false;
+      }
+    }
+
+
+
+
     // format number to have commas
     var numberWithCommas = function(x){
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
